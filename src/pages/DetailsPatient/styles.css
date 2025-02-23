@@ -1,0 +1,17 @@
+.containerImageCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.textPatient {
+    font-size: 40px;
+}
+
+@media (max-width: 768px) {
+    .textPatient {
+        font-size: 22px;
+    }
+}

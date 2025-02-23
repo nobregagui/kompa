@@ -1,0 +1,30 @@
+.logoMenu {
+    width: 95px !important;
+}
+
+.containerImageLogoMenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #dddd;
+}
+
+.containerMenuButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.menuItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.childButton {
+    margin-left: 15px !important;
+    margin-bottom: 10px !important;
+    font-size: 12px;
+}

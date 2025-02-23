@@ -1,0 +1,19 @@
+.containerProfile {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+ion-text {
+    font-weight: bold;
+}
+
+.logoProfile {
+    width: 70px !important;
+}
+
+@media (max-width: 768px) {
+   .containerProfile {
+    flex-direction: row-reverse;
+   }
+  }

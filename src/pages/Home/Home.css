@@ -1,0 +1,19 @@
+.cards-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.containerCardsAction {
+    display: flex;
+    border-top: 3px solid #dddd;
+    padding: 30px;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+    }
+    .containerCardsAction {
+        flex-direction: column;
+    }
+}
