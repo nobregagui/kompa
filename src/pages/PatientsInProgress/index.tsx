@@ -24,7 +24,6 @@ const PatientsInProgress: React.FC = () => {
     getUsers();
   }, []);
 
-  console.log('Active Patients:', activePatients);
 
   const handleToggleChange = (patientId: string | number, isActive: boolean) => {
     const patient = userData.find(user => user.id === Number(patientId));

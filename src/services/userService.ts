@@ -9,7 +9,6 @@ export const fetchUsers = async (): Promise<IUserData[]> => {
   try {
     const response = await axios.get("https://fakestoreapi.com/users");
 
-    console.log("Dados:", response.data);
 
     if (response.data.length > 0) {
       return response.data.map((user: any) => ({

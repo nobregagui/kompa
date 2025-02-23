@@ -29,7 +29,7 @@ function Menu(props: IMenu) {
     <IonMenu side="end" contentId="main-content">
       <IonContent className="ion-padding">
         <div className="containerImageLogoMenu">
-          <IonImg src="../logo.jpg" className="logoMenu" />
+          <IonImg src="../logo.png" className="logoMenu" />
         </div>
         <IonButtons className="containerMenuButtons">
           {props.buttons.map((item) => (

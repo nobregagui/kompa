@@ -17,7 +17,7 @@ const HeaderComponent: React.FC = () => {
     <IonHeader>
       <IonToolbar>
         <div className="container">
-          {!isMobile && <IonImg src="../logo.jpg" className="logo" />}
+          {!isMobile && <IonImg src="../logo.png" className="logo" />}
           {isMobile && <ProfileComponent />}
           {isMobile ? (
             <IonButtons slot="end">

@@ -29,7 +29,7 @@ const LoginComponent: React.FC = () => {
       <IonRow className="content">
         <IonCol className="containerInput">
           <div className="containerLogoTitle">
-            <IonImg src="../logo.jpg" className="logo" />
+            <IonImg src="../logo.png" className="logo" />
             <h1>Entrar na sua conta</h1>
           </div>
           

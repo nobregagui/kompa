@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IonButton, IonContent, IonIcon, IonText } from "@ionic/react";
+import { IonButton, IonContent, IonIcon, IonText, IonLoading } from "@ionic/react";
 import Layout from "../../components/Layout";
 import { menuButtons } from "../../data/menuData";
 import ListData from "../../components/ListDataComponent";
@@ -13,14 +13,16 @@ import { home } from "ionicons/icons";
 const Patients: React.FC = () => {
   const [userData, setUserData] = useState<IUserData[]>([]);
   const [searchTerm, setSearchTerm] = useState(""); 
-  const patientSelected = useSelector(viewPatientSelected)
+  const [isLoading, setIsLoading] = useState(true); 
   const activePatients = useSelector(selectActivePatients); 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getUsers = async () => {
+      setIsLoading(true); 
       const users = await fetchUsers();
       setUserData(users);
+      setIsLoading(false); 
     };
 
     getUsers();
@@ -47,22 +49,23 @@ const Patients: React.FC = () => {
     )
   );
 
-
   return (
     <Layout menuButtons={menuButtons}>
-     
+      <IonLoading isOpen={isLoading} message="Carregando dados..." />
+      
       <IonContent color="light">
-      <IonButton routerLink="/home" className="ion-padding" color={'dark'}>
-        <IonIcon slot="start" icon={home}></IonIcon>
-        Início
-      </IonButton>
+        <IonButton routerLink="/home" className="ion-padding" color={'dark'}>
+          <IonIcon slot="start" icon={home}></IonIcon>
+          Início
+        </IonButton>
+  
         <div className="containerTitleList">
           <IonText className="titleList">Pacientes</IonText>
         </div>
         
         <SearchComponent value={searchTerm} onSearch={setSearchTerm} />
-
-        {filteredUsers.length > 0 ? (
+  
+        {isLoading ? null : filteredUsers.length > 0 ? (
           filteredUsers.map((user) => {
             const userInfo = user.data.filter(
               (item) => item.label === "Nome" || item.label === "Email" || item.label === "Telefone"
@@ -90,6 +93,7 @@ const Patients: React.FC = () => {
       </IonContent>
     </Layout>
   );
+  
 };
 
 export default Patients;
