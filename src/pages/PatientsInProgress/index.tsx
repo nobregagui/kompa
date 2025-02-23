@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IonButton, IonContent, IonIcon, IonText } from "@ionic/react";
+import { IonButton, IonContent, IonIcon, IonText, IonLoading } from "@ionic/react";
 import Layout from "../../components/Layout";
 import { menuButtons } from "../../data/menuData";
 import ListData from "../../components/ListDataComponent";
@@ -12,18 +12,20 @@ import { home } from "ionicons/icons";
 const PatientsInProgress: React.FC = () => {
   const [userData, setUserData] = useState<IUserData[]>([]);
   const [searchTerm, setSearchTerm] = useState(""); 
+  const [isLoading, setIsLoading] = useState(true);
   const activePatients = useSelector(selectActivePatients); 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getUsers = async () => {
+      setIsLoading(true);
       const users = await fetchUsers();
       setUserData(users);
+      setIsLoading(false);
     };
 
     getUsers();
   }, []);
-
 
   const handleToggleChange = (patientId: string | number, isActive: boolean) => {
     const patient = userData.find(user => user.id === Number(patientId));
@@ -48,11 +50,12 @@ const PatientsInProgress: React.FC = () => {
 
   return (
     <Layout menuButtons={menuButtons}>
+      <IonLoading isOpen={isLoading} message="Carregando dados..." />
       <IonContent color="light">
-      <IonButton routerLink="/home" className="ion-padding" color={'dark'}>
-        <IonIcon slot="start" icon={home}></IonIcon>
-        Início
-      </IonButton>
+        <IonButton routerLink="/home" className="ion-padding" color={'dark'}>
+          <IonIcon slot="start" icon={home}></IonIcon>
+          Início
+        </IonButton>
         <div className="containerTitleList">
           <IonText className="titleList">Pacientes em acompanhamento</IonText>
         </div>

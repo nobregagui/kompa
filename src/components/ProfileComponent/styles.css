@@ -16,4 +16,8 @@ ion-text {
    .containerProfile {
     flex-direction: row-reverse;
    }
+
+   .containerLogout {
+    display: none;
+   }
   }

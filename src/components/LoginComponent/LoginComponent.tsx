@@ -7,20 +7,35 @@ const LoginComponent: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const history = useHistory(); 
+  const [loading, setLoading] = useState<boolean>(false);
+  const history = useHistory();
 
   const handleLogin = () => {
+    setError('');
+
     if (!email || !senha) {
       setError('Por favor, preencha todos os campos.');
       return;
     }
 
-    if (email === 'teste' && senha === '123') {
-      localStorage.setItem('auth', 'true'); 
-      history.push('/home'); 
-      setError('');
-    } else {
-      setError('Credenciais inválidas');
+    setLoading(true); 
+
+    setTimeout(() => {
+      if (email === 'teste' && senha === '123') {
+        localStorage.setItem('auth', 'true');
+        history.push('/home');
+        setError('');
+      } else {
+        setError('Credenciais inválidas');
+      }
+
+      setLoading(false); 
+    }, 500); 
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLogin();
     }
   };
 
@@ -29,10 +44,10 @@ const LoginComponent: React.FC = () => {
       <IonRow className="content">
         <IonCol className="containerInput">
           <div className="containerLogoTitle">
-            <IonImg src="../logo.png" className="logo" />
+            <IonImg src="../logo.png" className="logoLogin" />
             <h1>Entrar na sua conta</h1>
           </div>
-          
+
           <IonInput
             label="Email"
             labelPlacement="floating"
@@ -40,6 +55,7 @@ const LoginComponent: React.FC = () => {
             placeholder="Digite seu email"
             value={email}
             onIonChange={e => setEmail(e.detail.value!)}
+            onKeyUp={handleKeyPress}
           />
 
           <IonInput
@@ -49,12 +65,21 @@ const LoginComponent: React.FC = () => {
             fill="solid"
             placeholder="Digite sua senha"
             value={senha}
-            onIonChange={e => setSenha(e.detail.value!)} 
+            onIonChange={e => setSenha(e.detail.value!)}
+            onKeyUp={handleKeyPress}
           />
 
-          {error && <IonText color="danger"><p>{error}</p></IonText>} 
-          <IonButton color="secondary" expand="block" onClick={handleLogin}>Entrar</IonButton>
+          {error && <IonText color="danger"><p>{error}</p></IonText>}
           
+          <IonButton
+            color="secondary"
+            expand="block"
+            onClick={handleLogin}
+            disabled={loading}
+          >
+            {loading ? 'Entrando...' : 'Entrar'}
+          </IonButton>
+
           <div>
             <a href="#">Esqueceu a senha?</a>
           </div>

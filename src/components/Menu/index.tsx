@@ -3,6 +3,7 @@ import { IonButton, IonButtons, IonContent, IonIcon, IonImg, IonMenu, IonMenuTog
 import {chevronDown, chevronUp} from 'ionicons/icons';
 
 import "./styles.css";
+import ActionComponent from "../ActionComponent";
 
 interface IMenu {
   buttons: {
@@ -53,6 +54,7 @@ function Menu(props: IMenu) {
           ))}
         </IonButtons>
       </IonContent>
+      <ActionComponent />
     </IonMenu>
   );
 }
